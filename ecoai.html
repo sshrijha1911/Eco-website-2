@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EcoSmart AI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:linear-gradient(-45deg,#06142e,#0b1d3a,#0f2f52,#02101f);
+  background-size:400% 400%;
+  animation:gradient 12s ease infinite;
+  color:white;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+@keyframes gradient{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.container{
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
+
+.glass{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.3);
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px;
+  margin-bottom:25px;
+}
+
+nav h1{
+  color:#28f7d8;
+  font-size:30px;
+}
+
+nav ul{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+
+nav ul li{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+nav ul li:hover{
+  color:#28f7d8;
+}
+
+.login-page{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+.login-box{
+  width:350px;
+  padding:35px;
+  text-align:center;
+}
+
+.login-box h2{
+  margin-bottom:20px;
+  color:#28f7d8;
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin-top:12px;
+  border:none;
+  outline:none;
+  border-radius:10px;
+  background:rgba(255,255,255,0.15);
+  color:white;
+}
+
+select option{
+  background:#0b1d3a;
+}
+
+button{
+  width:100%;
+  padding:13px;
+  margin-top:20px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(to right,#1cefff,#57a7ff);
+  color:black;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.02);
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+  align-items:center;
+  padding:40px;
+  margin-bottom:30px;
+}
+
+.hero h1{
+  font-size:50px;
+  color:#28f7d8;
+}
+
+.hero p{
+  margin-top:15px;
+  line-height:1.8;
+}
+
+.avatar{
+  font-size:120px;
+  animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0px);}
+  50%{transform:translateY(-10px);}
+  100%{transform:translateY(0px);}
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  margin-top:20px;
+}
+
+.card{
+  padding:25px;
+}
+
+.card h3{
+  color:#28f7d8;
+  margin-bottom:10px;
+}
+
+.big-number{
+  font-size:36px;
+  font-weight:bold;
+}
+
+.calculator{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+
+.section{
+  padding:25px;
+}
+
+.section h2{
+  margin-bottom:15px;
+  color:#28f7d8;
+}
+
+.analysis{
+  margin-top:25px;
+  padding:25px;
+}
+
+.warning{
+  background:rgba(255,0,0,0.15);
+  border:1px solid rgba(255,0,0,0.4);
+  padding:20px;
+  border-radius:15px;
+}
+
+.recommendation{
+  margin-top:20px;
+  padding:20px;
+  border-radius:15px;
+  border:1px solid #28f7d8;
+}
+
+.chatbox{
+  padding:25px;
+}
+
+.chat-messages{
+  height:250px;
+  overflow-y:auto;
+  margin-bottom:15px;
+}
+
+.message{
+  margin-bottom:10px;
+  padding:10px;
+  border-radius:10px;
+}
+
+.user{
+  background:rgba(0,255,255,0.15);
+}
+
+.bot{
+  background:rgba(255,255,255,0.08);
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  opacity:0.7;
+}
+
+@media(max-width:768px){
+
+  nav{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  nav ul{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .hero h1{
+    font-size:35px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+
+<div class="login-page" id="loginPage">
+
+  <div class="login-box glass">
+
+    <h2>EcoSmart AI 🌍</h2>
+
+    <p>Track. Analyze. Reduce.</p>
+
+    <input type="email" placeholder="Enter Email">
+
+    <input type="password" placeholder="Enter Password">
+
+    <button onclick="login()">
+      Login
+    </button>
+
+  </div>
+
+</div>
+
+<!-- MAIN WEBSITE -->
+
+<div class="container" id="mainWebsite" style="display:none;">
+
+  <!-- NAVBAR -->
+
+  <nav class="glass">
+
+    <h1>EcoSmart AI</h1>
+
+    <ul>
+
+      <li onclick="showPage('homePage')">Home</li>
+
+      <li onclick="showPage('calculatorPage')">Calculator</li>
+
+      <li onclick="showPage('chatPage')">AI Chat</li>
+
+      <li onclick="showPage('aboutPage')">About</li>
+
+      <li onclick="logout()">Logout</li>
+
+    </ul>
+
+  </nav>
+
+  <!-- HOME PAGE -->
+
+  <div id="homePage">
+
+    <div class="hero glass">
+
+      <div>
+
+        <h1>EcoSmart AI 🌍</h1>
+
+        <p>
+          Smart sustainability platform
+          that helps users analyze carbon
+          footprint and improve eco habits.
+        </p>
+
+        <button onclick="showPage('calculatorPage')">
+          Start Calculating
+        </button>
+
+      </div>
+
+      <div style="text-align:center;">
+
+        <div class="avatar">🌿</div>
+
+        <h2>Smart Eco Monitoring</h2>
+
+      </div>
+
+    </div>
+
+    <div class="dashboard">
+
+      <div class="card glass">
+
+        <h3>⚡ Smart Analysis</h3>
+
+        <p>
+          AI-powered sustainability analysis
+          and environmental tracking.
+        </p>
+
+      </div>
+
+      <div class="card glass">
+
+        <h3>🌍 Carbon Monitoring</h3>
+
+        <p>
+          Analyze transportation,
+          electricity, food, and lifestyle.
+        </p>
+
+      </div>
+
+      <div class="card glass">
+
+        <h3>🤖 AI Recommendation</h3>
+
+        <p>
+          Personalized eco-friendly
+          recommendations instantly.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CALCULATOR PAGE -->
+
+  <div id="calculatorPage" style="display:none;">
+
+    <div class="section glass"
+    style="margin-bottom:25px;text-align:center;">
+
+      <h1 style="color:#28f7d8;">
+        🌍 Smart Carbon Calculator
+      </h1>
+
+      <p style="margin-top:10px;">
+        Analyze your sustainability performance.
+      </p>
+
+    </div>
+
+    <!-- INPUTS -->
+
+    <div class="calculator">
+
+      <div class="section glass">
+
+        <h2>🚗 Vehicle Usage</h2>
+
+        <select id="vehicleType">
+          <option>Bike</option>
+          <option>Car</option>
+          <option>Bus</option>
+          <option>Train</option>
+        </select>
+
+        <input type="number"
+        id="distance"
+        placeholder="Distance Travelled (km)">
+
+      </div>
+
+      <div class="section glass">
+
+        <h2>🍔 Food Consumption</h2>
+
+        <select id="foodType">
+          <option>Vegetarian</option>
+          <option>Non-Vegetarian</option>
+          <option>Vegan</option>
+        </select>
+
+        <input type="number"
+        id="foodMeals"
+        placeholder="Meals per day">
+
+      </div>
+
+      <div class="section glass">
+
+        <h2>💡 Electricity Usage</h2>
+
+        <input type="number"
+        id="electricity"
+        placeholder="Electricity Units Used">
+
+        <input type="number"
+        id="hours"
+        placeholder="Hours Used">
+
+      </div>
+
+      <div class="section glass">
+
+        <h2>🏠 Lifestyle</h2>
+
+        <input type="number"
+        id="shopping"
+        placeholder="Shopping Frequency / month">
+
+        <input type="number"
+        id="streaming"
+        placeholder="Streaming Hours">
+
+      </div>
+
+    </div>
+
+    <!-- CONTROLS -->
+
+    <div class="section glass"
+    style="margin-top:25px;">
+
+      <h2>⚡ Smart Energy Controls</h2>
+
+      <br>
+
+      <label>
+        <input type="checkbox" id="led">
+        LED Lighting
+      </label>
+
+      <br><br>
+
+      <label>
+        <input type="checkbox" id="daylight">
+        Natural Daylight
+      </label>
+
+      <br><br>
+
+      <label>
+        <input type="checkbox" id="occupied">
+        Room Occupied
+      </label>
+
+      <button onclick="calculateCarbon()">
+        Calculate Smart Footprint
+      </button>
+
+    </div>
+
+    <!-- RESULTS -->
+
+    <div id="resultSection"
+    style="display:none;margin-top:30px;">
+
+      <div class="dashboard">
+
+        <div class="card glass">
+
+          <h3>🌍 Carbon Footprint</h3>
+
+          <div class="big-number"
+          id="carbonOutput">0</div>
+
+          <p>kg CO₂ / hr</p>
+
+        </div>
+
+        <div class="card glass">
+
+          <h3>⚡ Energy Usage</h3>
+
+          <div class="big-number"
+          id="energyOutput">0</div>
+
+          <p>kWh / hr</p>
+
+        </div>
+
+        <div class="card glass">
+
+          <h3>💰 Operational Cost</h3>
+
+          <div class="big-number"
+          id="costOutput">₹0</div>
+
+          <p>Estimated Cost</p>
+
+        </div>
+
+        <div class="card glass">
+
+          <h3>🌱 Sustainability Score</h3>
+
+          <div class="big-number"
+          id="scoreOutput">100</div>
+
+          <p id="carbonLevel">
+            🟢 Low Carbon Emission
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- ANALYSIS -->
+
+      <div class="analysis glass">
+
+        <h2>🤖 AI Smart Analysis</h2>
+
+        <div class="warning">
+
+          <h3>⚠ Sustainability Analysis</h3>
+
+          <p id="analysisText">
+
+            Sustainability analysis appears here.
+
+          </p>
+
+        </div>
+
+        <div class="recommendation">
+
+          <h3>🌱 AI Recommendation</h3>
+
+          <p id="recommendText">
+
+            Recommendations appear here.
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- AVATAR -->
+
+      <div class="dashboard">
+
+        <div class="card glass"
+        style="text-align:center;">
+
+          <h2>🌱 Eco Avatar</h2>
+
+          <div class="avatar"
+          id="mainAvatar">🌿</div>
+
+          <p id="avatarText">
+            Excellent sustainability performance.
+          </p>
+
+        </div>
+
+        <div class="card glass">
+
+          <h3>💡 Smart Eco Tips</h3>
+
+          <p id="smartTip">
+            Use natural daylight ☀️
+          </p>
+
+          <br>
+
+          <h3>🔥 Eco Streak</h3>
+
+          <div class="big-number">7</div>
+
+          <p>Days of sustainable habits</p>
+
+        </div>
+
+      </div>
+
+      <!-- IMPACT -->
+
+      <div class="dashboard">
+
+        <div class="card glass">
+
+          <h3>🌳 Trees Equivalent</h3>
+
+          <div class="big-number">12</div>
+
+          <p>Required to absorb your CO₂</p>
+
+        </div>
+
+        <div class="card glass">
+
+          <h3>⚡ Energy Saved</h3>
+
+          <div class="big-number">18%</div>
+
+          <p>Compared to last week</p>
+
+        </div>
+
+        <div class="card glass">
+
+          <h3>🏆 Eco Rank</h3>
+
+          <div class="big-number">A+</div>
+
+          <p>Excellent sustainability level</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CHAT PAGE -->
+
+  <div id="chatPage" style="display:none;">
+
+    <div class="chatbox glass">
+
+      <h2>💬 AI Eco Chat Assistant</h2>
+
+      <div class="chat-messages"
+      id="chatMessages">
+
+        <div class="message bot">
+          Hello 👋 I am your EcoSmart AI Assistant.
+        </div>
+
+      </div>
+
+      <input type="text"
+      id="chatInput"
+      placeholder="Ask sustainability questions...">
+
+      <button onclick="sendMessage()">
+        Send Message
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ABOUT PAGE -->
+
+  <div id="aboutPage" style="display:none;">
+
+    <div class="section glass">
+
+      <h2>📘 About EcoSmart AI</h2>
+
+      <br>
+
+      <p>
+        EcoSmart AI is an intelligent
+        sustainability platform that helps
+        users understand their carbon footprint.
+      </p>
+
+      <br>
+
+      <p>
+        Supported SDGs:
+        Climate Action,
+        Affordable Clean Energy,
+        Responsible Consumption.
+      </p>
+
+    </div>
+
+  </div>
+
+  <footer>
+
+    EcoSmart AI © 2026 🌍
+
+  </footer>
+
+</div>
+
+<script>
+
+function login(){
+
+  document.getElementById('loginPage')
+  .style.display='none';
+
+  document.getElementById('mainWebsite')
+  .style.display='block';
+
+}
+
+function logout(){
+
+  document.getElementById('mainWebsite')
+  .style.display='none';
+
+  document.getElementById('loginPage')
+  .style.display='flex';
+
+}
+
+function showPage(pageId){
+
+  document.getElementById('homePage')
+  .style.display='none';
+
+  document.getElementById('calculatorPage')
+  .style.display='none';
+
+  document.getElementById('chatPage')
+  .style.display='none';
+
+  document.getElementById('aboutPage')
+  .style.display='none';
+
+  document.getElementById(pageId)
+  .style.display='block';
+
+}
+
+function calculateCarbon(){
+
+  document.getElementById('resultSection')
+  .style.display='block';
+
+  let distance =
+  parseFloat(document.getElementById('distance').value)||0;
+
+  let electricity =
+  parseFloat(document.getElementById('electricity').value)||0;
+
+  let shopping =
+  parseFloat(document.getElementById('shopping').value)||0;
+
+  let streaming =
+  parseFloat(document.getElementById('streaming').value)||0;
+
+  let foodMeals =
+  parseFloat(document.getElementById('foodMeals').value)||0;
+
+  let carbon =
+  (distance*0.5)+
+  (electricity*1.2)+
+  (shopping*0.8)+
+  (streaming*0.3)+
+  (foodMeals*0.6);
+
+  let energy = electricity*1.5;
+
+  let cost = electricity*8;
+
+  let score = Math.max(0,100-carbon);
+
+  document.getElementById('carbonOutput')
+  .innerHTML=carbon.toFixed(1);
+
+  document.getElementById('energyOutput')
+  .innerHTML=energy.toFixed(1);
+
+  document.getElementById('costOutput')
+  .innerHTML='₹'+cost.toFixed(0);
+
+  document.getElementById('scoreOutput')
+  .innerHTML=score.toFixed(0);
+
+  if(carbon >= 40){
+
+    document.getElementById('mainAvatar')
+    .innerHTML='🥀';
+
+    document.getElementById('avatarText')
+    .innerHTML='High pollution detected';
+
+    document.getElementById('carbonLevel')
+    .innerHTML='🔴 High Carbon Emission';
+
+    document.getElementById('analysisText')
+    .innerHTML='High environmental impact detected';
+
+    document.getElementById('recommendText')
+    .innerHTML='Reduce electricity and travel usage';
+
+    document.getElementById('smartTip')
+    .innerHTML='⚡ Switch OFF unused appliances';
+
+  }
+
+  else if(carbon >= 20){
+
+    document.getElementById('mainAvatar')
+    .innerHTML='🌱';
+
+    document.getElementById('avatarText')
+    .innerHTML='Moderate sustainability detected';
+
+    document.getElementById('carbonLevel')
+    .innerHTML='🟡 Medium Carbon Emission';
+
+    document.getElementById('analysisText')
+    .innerHTML='Moderate environmental impact';
+
+    document.getElementById('recommendText')
+    .innerHTML='Use public transport and save energy';
+
+    document.getElementById('smartTip')
+    .innerHTML='🚴 Try cycling twice a week';
+
+  }
+
+  else{
+
+    document.getElementById('mainAvatar')
+    .innerHTML='🌿';
+
+    document.getElementById('avatarText')
+    .innerHTML='Excellent sustainability performance';
+
+    document.getElementById('carbonLevel')
+    .innerHTML='🟢 Low Carbon Emission';
+
+    document.getElementById('analysisText')
+    .innerHTML='Excellent eco-friendly lifestyle';
+
+    document.getElementById('recommendText')
+    .innerHTML='Maintain your green habits';
+
+    document.getElementById('smartTip')
+    .innerHTML='🌿 Continue eco-friendly habits';
+
+  }
+
+  document.getElementById('resultSection')
+  .scrollIntoView({behavior:'smooth'});
+
+}
+
+function sendMessage(){
+
+  let input =
+  document.getElementById('chatInput');
+
+  let message = input.value;
+
+  if(message.trim()==='') return;
+
+  let chatMessages =
+  document.getElementById('chatMessages');
+
+  let userMessage =
+  document.createElement('div');
+
+  userMessage.className='message user';
+
+  userMessage.innerHTML=message;
+
+  chatMessages.appendChild(userMessage);
+
+  let botMessage =
+  document.createElement('div');
+
+  botMessage.className='message bot';
+
+  let msg = message.toLowerCase();
+
+  let response='';
+
+  if(msg.includes('electricity')){
+
+    response =
+    '⚡ Use LED lights and switch off unused appliances.';
+
+  }
+
+  else if(msg.includes('plastic')){
+
+    response =
+    '♻️ Avoid single-use plastics and use reusable products.';
+
+  }
+
+  else if(msg.includes('water')){
+
+    response =
+    '💧 Save water by fixing leaks and reducing waste.';
+
+  }
+
+  else{
+
+    let responses=[
+
+      '🌱 Sustainable habits protect the environment.',
+
+      '🚴 Cycling reduces carbon emissions.',
+
+      '🌳 Planting trees improves air quality.',
+
+      '⚡ Saving energy reduces pollution.'
+
+    ];
+
+    response =
+    responses[Math.floor(Math.random()*responses.length)];
+
+  }
+
+  botMessage.innerHTML=response;
+
+  chatMessages.appendChild(botMessage);
+
+  input.value='';
+
+  chatMessages.scrollTop=
+  chatMessages.scrollHeight;
+
+}
+
+</script>
+
+</body>
+</html>
